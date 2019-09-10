@@ -1,0 +1,24 @@
+<ng-container *ngFor="let elem of attribute|keyvalue">
+  <mat-accordion class="m-5">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        {{attributeLabel[elem.key]}}
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        {{elem.value}}
+        <table [dataSource]="dataTable[elem.key]" class="mat-elevation-z2" mat-table>
+          <ng-container [matColumnDef]="'key'">
+            <th *matHeaderCellDef mat-header-cell class="text-right text-uppercase">Scout's description</th>
+            <td *matCellDef="let element" mat-cell class="text-right">{{element.key}} </td>
+          </ng-container>
+          <ng-container [matColumnDef]="'value'">
+            <th *matHeaderCellDef mat-header-cell class="text-uppercase">Value</th>
+            <td *matCellDef="let element" mat-cell>{{element.value}} </td>
+          </ng-container>
+          <tr *matHeaderRowDef="columnsTable" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: columnsTable;" mat-row></tr>
+        </table>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>

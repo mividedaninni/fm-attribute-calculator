@@ -1,0 +1,13 @@
+<form [formGroup]="formGroup">
+  <mat-form-field class="col-12" floatLabel="always">
+    <mat-label for="media"> Media handling:</mat-label>
+    <mat-select formControlName="mediaHandling" id="media" required placeholder="Choose a media handling style">
+      <mat-option *ngFor="let media of mediaHandlingOptions | keyvalue" [value]="media.value">
+        {{media.value}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="mediaHandingFormControl.hasError('required')">
+      Media handling is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+</form>

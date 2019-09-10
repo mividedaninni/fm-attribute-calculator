@@ -1,0 +1,29 @@
+//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$my-theme-primary: mat-palette($mat-indigo);
+$my-theme-accent: mat-palette($mat-light-blue);
+$my-theme-warn: mat-palette($mat-red);
+
+$my-theme: mat-light-theme(
+    $my-theme-primary,
+    $my-theme-accent,
+    $my-theme-warn
+);
+
+@include angular-material-theme($my-theme);
+
+mat-form-field {
+  margin-bottom: 1.5rem;
+}
+
+table {
+  margin: 1rem auto;
+}
+
+.mat-cell, .mat-header-cell {
+  padding: 12px !important;
+}

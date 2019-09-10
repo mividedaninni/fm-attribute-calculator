@@ -1,0 +1,28 @@
+<mat-card class="row m-5">
+  <div class="d-inline-flex col-12 px-0">
+    <app-select-personality class="col-8 px-0"></app-select-personality>
+    <app-select-media class="col-4 px-0"></app-select-media>
+  </div>
+  <ng-container>
+    <div class="d-inline-flex col-12 px-0">
+      <div class="col-4">
+        <mat-checkbox [(ngModel)]="clearPersonality">Personal parameters</mat-checkbox>
+        <mat-icon [matTooltip]="tooltipText" style="font-size: inherit; line-height: inherit; margin-left: 8px">
+          info
+        </mat-icon>
+      </div>
+      <div class="col-4">
+        <mat-checkbox [(ngModel)]="clearMedia">Media handling parameter</mat-checkbox>
+      </div>
+      <div class="col-4">
+        <button (click)="clearForm()" [disabled]="!(clearMedia || clearPersonality)" color="primary"
+                mat-raised-button
+                type="button">Clear
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</mat-card>
+<ng-container *ngIf="finalAttibute">
+  <app-results [results]="finalAttibute"></app-results>
+</ng-container>
