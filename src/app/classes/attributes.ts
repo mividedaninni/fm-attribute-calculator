@@ -19,49 +19,49 @@ export class Attributes {
   constructor() {
   }
 
-  static addAsteriskPersonality() {
+  static addAsteriskPers() {
     const attrAst = new Attributes();
     attrAst.temperament = new MinMax(5, 20);
     attrAst.professionalism = new MinMax(11, 20);
     return attrAst;
   }
 
-  static addOnePersonality() {
+  static addOnePers() {
     const attrAst = new Attributes();
     attrAst.professionalism = new MinMax(1, 17);
     attrAst.temperament = new MinMax(1, 19);
     return attrAst;
   }
 
-  static addTwoPersonality() {
+  static addTwoPers() {
     const attrAst = new Attributes();
     attrAst.ambition = new MinMax(1, 15);
     attrAst.loyalty = new MinMax(10, 20);
     return attrAst;
   }
 
-  static addThreePersonality() {
+  static addThreePers() {
     const attrAst = new Attributes();
     attrAst.ambition = new MinMax(6, 20);
     attrAst.loyalty = new MinMax(1, 10);
     return attrAst;
   }
 
-  static addFourPersonality() {
+  static addFourPers() {
     const attrAst = new Attributes();
     attrAst.loyalty = new MinMax(1, 17);
     attrAst.ambition = new MinMax(8, 20);
     return attrAst;
   }
 
-  static addFivePersonality() {
+  static addFivePers() {
     const attrAst = new Attributes();
     attrAst.temperament = new MinMax(1, 9);
     attrAst.pressure = new MinMax(1, 14);
     return attrAst;
   }
 
-  static addSixPersonality() {
+  static addSixPers() {
     const attrAst = new Attributes();
     attrAst.professionalism = new MinMax(1, 17);
     attrAst.ambition = new MinMax(10, 17);

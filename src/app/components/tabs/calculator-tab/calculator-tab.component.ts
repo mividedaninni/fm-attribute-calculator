@@ -3,6 +3,7 @@ import {combineLatest, Observable} from 'rxjs';
 import {Attributes} from '../../../classes/attributes';
 import {ParamCalculatorService} from '../../../services/param-calculator.service';
 import {ClearAttributes} from '../../../classes/clear-attributes';
+import {ParamEventsService} from '../../../services/param-events.service';
 
 @Component({
   selector: 'app-calculator-tab',
@@ -18,15 +19,15 @@ export class CalculatorTabComponent implements OnInit {
   private attributeFromPersonality: Observable<Attributes>;
   private attributeFromMedia: Observable<Attributes>;
 
-  constructor(private paramCalculatorService: ParamCalculatorService) {
-    this.attributeFromPersonality = this.paramCalculatorService.paramFromPers$;
-    this.attributeFromMedia = this.paramCalculatorService.paramFromMedia$;
-    combineLatest([this.paramCalculatorService.paramFromPers$, this.paramCalculatorService.paramFromMedia$])
+  constructor(private paramEventsService: ParamEventsService) {
+    this.attributeFromPersonality = this.paramEventsService.paramFromPers$;
+    this.attributeFromMedia = this.paramEventsService.paramFromMedia$;
+    combineLatest([this.paramEventsService.paramFromPers$, this.paramEventsService.paramFromMedia$])
       .subscribe(([fromPers, fromMedia]) => {
-        this.finalAttibute = this.paramCalculatorService.mergeObj(fromPers, fromMedia);
+        this.finalAttibute = ParamCalculatorService.mergeObj(fromPers, fromMedia);
       });
 
-    this.paramCalculatorService.clearForm$.subscribe((data) => {
+    this.paramEventsService.clearForm$.subscribe((data) => {
       if (data) {
         this.finalAttibute = null;
       }
@@ -41,7 +42,7 @@ export class CalculatorTabComponent implements OnInit {
     if (this.clearMedia) {
       elemToClean.media = true;
     }
-    this.paramCalculatorService.clearFormEmitter(elemToClean);
+    this.paramEventsService.clearFormEmitter(elemToClean);
     this.clearPersonality = this.clearMedia = false;
   }
 

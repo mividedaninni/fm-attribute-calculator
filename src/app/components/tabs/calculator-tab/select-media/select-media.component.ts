@@ -2,7 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {MediaHandlingEnum} from '../../../../classes/media-handling.enum';
-import {ParamCalculatorService} from '../../../../services/param-calculator.service';
+import {ParamCalculatorMedia} from '../../../../services/param-calculator-media';
+import {ParamEventsService} from '../../../../services/param-events.service';
 
 @Component({
   selector: 'app-select-media',
@@ -16,14 +17,14 @@ export class SelectMediaComponent implements OnInit, OnDestroy {
   public subs: Subscription[] = [];
   public mediaHandingFormControl: AbstractControl;
 
-  constructor(private fb: FormBuilder, private paramCalculatorService: ParamCalculatorService) {
+  constructor(private fb: FormBuilder, private paramEventsService: ParamEventsService) {
     this.formGroup = this.fb.group({
         mediaHandling: [null, Validators.required]
       }
     );
     this.mediaHandingFormControl = this.formGroup.get('mediaHandling');
     this.subs.push(
-      this.paramCalculatorService.clearForm$.subscribe((data) => {
+      this.paramEventsService.clearForm$.subscribe((data) => {
         if (data && data.media) {
           this.mediaHandingFormControl.patchValue(null);
         }
@@ -39,8 +40,8 @@ export class SelectMediaComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.mediaHandingFormControl.valueChanges.subscribe((data) => {
         if (data) {
-          const attributes = ParamCalculatorService.calculateBaseParamFromMediaHandling(data);
-          this.paramCalculatorService.setParamMedia(attributes);
+          const attributes = ParamCalculatorMedia.calculateBaseParamFromMediaHandling(data);
+          this.paramEventsService.setParamMedia(attributes);
         }
       })
     );

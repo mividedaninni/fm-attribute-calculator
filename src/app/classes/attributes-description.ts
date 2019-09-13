@@ -1,14 +1,35 @@
 import {KeyValue} from '@angular/common';
 
-export enum USEFUL_LINKS {
-  QUANTIFY_SCOUT_REPORT = 'https://community.sigames.com/topic/410813-some-research-on-hidden-ratings-quantifying-the-scouting-report/',
-  HIDDEN_ATTRIBUTE_GUIDEFM = 'https://www.guidetofm.com/players/attributes#hidden-attributes',
-  HIDDEN_ATTRIBUTES = 'https://www.reddit.com/r/footballmanagergames/comments/3a9yb4/eli5_hidden_attributes/',
-  PLAYER_PERSONALITIES = 'https://www.guidetofm.com/players/personalities',
-  READ_SCOUT_REPORT = 'https://www.reddit.com/r/footballmanagergames/comments/6z9acn/how_to_read_scout_reports_in_fm_and_avoid_signing',
-  ULTIMATE_PERSONALITY_GUIDE = 'https://community.sigames.com/topic/247494-the-ultimate-personalitymedia-handling-guide/',
-  DRIVE_CALCULATOR = 'https://drive.google.com/file/d/0B1Wkkwqh7t3BX25QWEF0NlhtOEU/edit'
-}
+export const USEFULLINKS: Array<KeyValue<string, string>> = [
+  {
+    key: 'The ultimate personality & media handling guide',
+    value: 'https://community.sigames.com/topic/247494-the-ultimate-personalitymedia-handling-guide/'
+  },
+  {
+    key: 'Quantifying the scouting report',
+    value: 'https://community.sigames.com/topic/410813-some-research-on-hidden-ratings-quantifying-the-scouting-report/'
+  },
+  {
+    key: 'A guide to hidden attributes',
+    value: 'https://www.guidetofm.com/players/attributes#hidden-attributes'
+  },
+  {
+    key: 'Hidden attributes',
+    value: 'https://www.reddit.com/r/footballmanagergames/comments/3a9yb4/eli5_hidden_attributes/'
+  },
+  {
+    key: 'Players personalities guide',
+    value: 'https://www.guidetofm.com/players/personalities'
+  },
+  {
+    key: 'Read scout reports',
+    value: 'https://www.reddit.com/r/footballmanagergames/comments/6z9acn/how_to_read_scout_reports_in_fm_and_avoid_signing'
+  },
+  {
+    key: 'Another attribute calculator in Drive',
+    value: 'https://drive.google.com/file/d/0B1Wkkwqh7t3BX25QWEF0NlhtOEU/edit'
+  },
+];
 
 export enum STATIC_ATTRIBUTE_DESCRIPTION {
   adaptability = 'How well a player settles in a new country. ' +
