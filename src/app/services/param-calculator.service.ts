@@ -3,22 +3,6 @@ import {MinMax} from '../classes/min-max';
 
 export class ParamCalculatorService {
 
-  private static evaluateMinMaxAttribute(firstAttributeObject: Attributes, secondAttributeObject: Attributes, elem: string): MinMax {
-    let min;
-    let max;
-    if (firstAttributeObject[elem].max < secondAttributeObject[elem].min) {
-      min = secondAttributeObject[elem].min;
-      max = secondAttributeObject[elem].max;
-    } else if (secondAttributeObject[elem].max < firstAttributeObject[elem].max) {
-      min = firstAttributeObject[elem].min;
-      max = firstAttributeObject[elem].max;
-    } else {
-      max = Math.min(firstAttributeObject[elem].max, secondAttributeObject[elem].max);
-      min = Math.max(firstAttributeObject[elem].min, secondAttributeObject[elem].min);
-    }
-    return new MinMax(min, max);
-  }
-
   public static mergeObj(attrFromPers: Attributes, attrFromMedia: Attributes) {
     if (!attrFromPers || !attrFromMedia) {
       return null;
@@ -49,16 +33,17 @@ export class ParamCalculatorService {
         retObj[elem] = ParamCalculatorService.evaluateMinMaxAttribute(attrFromPers, attrFromMedia, elem);
       });
 
-    if (attrFromPers.fromDetermination) {
-      Object.keys(attrFromPers.fromDetermination)
+    const attrFromDet: Attributes = attrFromPers.getFromDetermination();
+    if (attrFromDet) {
+      Object.keys(attrFromDet)
         .filter((key) => key in retObj)
         .forEach((elem) => {
-          retObj[elem] = ParamCalculatorService.evaluateMinMaxAttribute(attrFromPers.fromDetermination, retObj, elem);
+          retObj[elem] = ParamCalculatorService.evaluateMinMaxAttribute(attrFromDet, retObj, elem);
         });
     }
 
-    const arr2Pers = attrFromPers.doubleCases !== undefined ? attrFromPers.doubleCases : [];
-    const arr2Media = attrFromMedia.doubleCases !== undefined ? attrFromMedia.doubleCases : [];
+    const arr2Pers = attrFromPers.getDoubleCases() !== undefined ? attrFromPers.getDoubleCases() : [];
+    const arr2Media = attrFromMedia.getDoubleCases() !== undefined ? attrFromMedia.getDoubleCases() : [];
     const arrDouble = [...arr2Pers, ...arr2Media];
     arrDouble.forEach((doubleElement) => {
       if (Object.keys(doubleElement).length !== 2) {
@@ -103,6 +88,22 @@ export class ParamCalculatorService {
       }
     });
     return retObj;
+  }
+
+  private static evaluateMinMaxAttribute(firstAttributeObject: Attributes, secondAttributeObject: Attributes, elem: string): MinMax {
+    let min;
+    let max;
+    if (firstAttributeObject[elem].max < secondAttributeObject[elem].min) {
+      min = secondAttributeObject[elem].min;
+      max = secondAttributeObject[elem].max;
+    } else if (secondAttributeObject[elem].max < firstAttributeObject[elem].max) {
+      min = firstAttributeObject[elem].min;
+      max = firstAttributeObject[elem].max;
+    } else {
+      max = Math.min(firstAttributeObject[elem].max, secondAttributeObject[elem].max);
+      min = Math.max(firstAttributeObject[elem].min, secondAttributeObject[elem].min);
+    }
+    return new MinMax(min, max);
   }
 
 }

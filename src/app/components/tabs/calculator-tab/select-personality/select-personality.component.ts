@@ -3,10 +3,10 @@ import {PersonalityEnum} from '../../../../classes/personality.enum';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {Attributes} from '../../../../classes/attributes';
-import {MinMax} from '../../../../classes/min-max';
 import {InputErrorMatcher} from '../../../../classes/input-error-matcher';
 import {ParamCalculatorPersonality} from '../../../../services/param-calculator-personality';
 import {ParamEventsService} from '../../../../services/param-events.service';
+import {AttributeValueTypes} from '../../../../classes/attribute-value-types';
 
 @Component({
   selector: 'app-select-personality',
@@ -46,7 +46,7 @@ export class SelectPersonalityComponent implements OnInit, OnDestroy {
         if (this.detValue && personality) {
           const attributes: Attributes =
             ParamCalculatorPersonality.calculateBaseParamFromPersonality(this.detValue, personality);
-          attributes.determination = new MinMax(this.detValue);
+          attributes.set('determination', (this.detValue) as AttributeValueTypes);
           this.paramEventsService.setParamPers(attributes);
         }
       }),

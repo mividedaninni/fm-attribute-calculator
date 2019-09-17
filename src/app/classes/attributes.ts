@@ -1,107 +1,144 @@
 import {MinMax} from './min-max';
+import {AttributesType} from './attribute-types';
+import {AttributeValueTypes} from './attribute-value-types';
 
 export class Attributes {
-  ambition: MinMax;
-  controversy: MinMax;
-  determination: MinMax;
-  loyalty: MinMax;
-  pressure: MinMax;
-  professionalism: MinMax;
-  sportsmanship: MinMax;
-  temperament: MinMax;
+  private ambition: MinMax;
+  private controversy: MinMax;
+  private determination: MinMax;
+  private loyalty: MinMax;
+  private pressure: MinMax;
+  private professionalism: MinMax;
+  private sportsmanship: MinMax;
+  private temperament: MinMax;
   // each array's elem is a couple of attribute;
   // if there's one that not overlap, the other MUST be true
   // if are overlapped, no info gained
-  doubleCases: Attributes[];
+  private doubleCases: Attributes[];
   // param to eventually mix calculating from determination value
-  fromDetermination: Attributes;
+  private fromDetermination: Attributes;
 
   constructor() {
   }
 
-  static addAsteriskPers() {
-    const attrAst = new Attributes();
-    attrAst.temperament = new MinMax(5, 20);
-    attrAst.professionalism = new MinMax(11, 20);
-    return attrAst;
+  public static addAsteriskPers() {
+    return new Attributes()
+      .set('temperament', 5, 20)
+      .set('professionalism', 11, 20);
   }
 
-  static addOnePers() {
-    const attrAst = new Attributes();
-    attrAst.professionalism = new MinMax(1, 17);
-    attrAst.temperament = new MinMax(1, 19);
-    return attrAst;
+  public static addOnePers() {
+    return new Attributes()
+      .set('professionalism', 1, 17)
+      .set('temperament', 1, 19);
   }
 
-  static addTwoPers() {
-    const attrAst = new Attributes();
-    attrAst.ambition = new MinMax(1, 15);
-    attrAst.loyalty = new MinMax(10, 20);
-    return attrAst;
+  public static addTwoPers() {
+    return new Attributes()
+      .set('ambition', 1, 15)
+      .set('loyalty', 10, 20);
   }
 
-  static addThreePers() {
-    const attrAst = new Attributes();
-    attrAst.ambition = new MinMax(6, 20);
-    attrAst.loyalty = new MinMax(1, 10);
-    return attrAst;
+  public static addThreePers() {
+    return new Attributes()
+      .set('ambition', 16, 20)
+      .set('loyalty', 1, 10);
   }
 
-  static addFourPers() {
-    const attrAst = new Attributes();
-    attrAst.loyalty = new MinMax(1, 17);
-    attrAst.ambition = new MinMax(8, 20);
-    return attrAst;
+  public static addFourPers() {
+    return new Attributes()
+      .set('ambition', 1, 17)
+      .set('loyalty', 8, 20);
   }
 
-  static addFivePers() {
-    const attrAst = new Attributes();
-    attrAst.temperament = new MinMax(1, 9);
-    attrAst.pressure = new MinMax(1, 14);
-    return attrAst;
+  public static addFivePers() {
+    return new Attributes()
+      .set('temperament', 1, 9)
+      .set('pressure', 1, 14);
   }
 
-  static addSixPers() {
-    const attrAst = new Attributes();
-    attrAst.professionalism = new MinMax(1, 17);
-    attrAst.ambition = new MinMax(10, 17);
-    return attrAst;
+  public static addSixPers() {
+    return new Attributes()
+      .set('professionalism', 1, 17)
+      .set('ambition', 10, 17);
   }
 
-  static addOneMedia() {
-    const attrAst = new Attributes();
-    attrAst.pressure = new MinMax(1, 14);
-    attrAst.professionalism = new MinMax(1, 14);
-    return attrAst;
+  public static addOneMedia() {
+    return new Attributes()
+      .set('pressure', 1, 14)
+      .set('professionalism', 1, 14);
   }
 
-  static addTwoMedia() {
-    const attrAst = new Attributes();
-    attrAst.loyalty = new MinMax(1, 10);
-    // this last two are both
-    attrAst.sportsmanship = new MinMax(1, 11);
-    attrAst.professionalism = new MinMax(1, 12);
-    return attrAst;
+  public static addTwoMedia() {
+    return new Attributes()
+      .set('loyalty', 1, 10)
+      .set('sportsmanship', 1, 11)
+      .set('professionalism', 1, 12);
   }
 
-  static addThreeMedia() {
-    const attrAst = new Attributes();
-    attrAst.temperament = new MinMax(8, 20);
-    attrAst.sportsmanship = new MinMax(8, 20);
-    return attrAst;
+  public static addThreeMedia() {
+    return new Attributes()
+      .set('temperament', 8, 20)
+      .set('sportsmanship', 8, 20);
   }
 
-  static addFourMedia() {
-    const attrAst = new Attributes();
-    attrAst.temperament = new MinMax(1, 14);
-    attrAst.pressure = new MinMax(1, 14);
-    return attrAst;
+  public static addFourMedia() {
+    return new Attributes()
+      .set('temperament', 1, 14)
+      .set('pressure', 1, 14);
   }
 
-  static addFiveMedia() {
-    const attrAst = new Attributes();
-    attrAst.controversy = new MinMax(6, 14);
-    attrAst.professionalism = new MinMax(1, 14);
-    return attrAst;
+  public static addFiveMedia() {
+    return new Attributes()
+      .set('controversy', 6, 14)
+      .set('professionalism', 1, 14);
+  }
+
+  public getFromDetermination(): Attributes {
+    return this.fromDetermination;
+  }
+
+  public setFromDetermination(attributes: Attributes) {
+    this.fromDetermination = attributes;
+    return this;
+  }
+
+  public getDoubleCases(): Attributes[] {
+    return this.doubleCases;
+  }
+
+  public setDoubleCases(doubled: Attributes[]) {
+    this.doubleCases = [...doubled];
+    return this;
+  }
+
+  public set(elem: AttributesType, min: AttributeValueTypes, max?: AttributeValueTypes) {
+    switch (elem) {
+      case 'ambition':
+        this.ambition = new MinMax(min, max);
+        break;
+      case 'controversy':
+        this.controversy = new MinMax(min, max);
+        break;
+      case 'determination':
+        this.determination = new MinMax(min, max);
+        break;
+      case 'loyalty':
+        this.loyalty = new MinMax(min, max);
+        break;
+      case 'pressure':
+        this.pressure = new MinMax(min, max);
+        break;
+      case 'professionalism':
+        this.professionalism = new MinMax(min, max);
+        break;
+      case 'sportsmanship':
+        this.sportsmanship = new MinMax(min, max);
+        break;
+      case 'temperament':
+        this.temperament = new MinMax(min, max);
+        break;
+    }
+    return this;
   }
 }

@@ -1,31 +1,31 @@
 import {PersonalityEnum} from '../classes/personality.enum';
 import {Attributes} from '../classes/attributes';
-import {MinMax} from '../classes/min-max';
+import {CasesFromDetermination} from '../classes/cases-from-determination';
 
 export class ParamCalculatorPersonality {
 
-  public static calculateParamFromDetermination(determination: number, cases: number[]) {
+  public static calculateParamFromDetermination(determination: number, cases: CasesFromDetermination[]): Attributes {
     const attributes = new Attributes();
-    if (cases.indexOf(1) !== -1 && determination <= 5) {
-      attributes.ambition = new MinMax(10, 20);
+    if (cases.indexOf('CASE_ONE') !== -1 && determination <= 5) {
+      attributes.set('ambition', 10, 20);
     }
-    if (cases.indexOf(2) !== -1 && determination <= 9) {
-      attributes.professionalism = new MinMax(5, 20);
+    if (cases.indexOf('CASE_TWO') !== -1 && determination <= 9) {
+      attributes.set('professionalism', 5, 20);
     }
-    if (cases.indexOf(3) !== -1 && determination <= 9) {
-      attributes.pressure = new MinMax(4, 20);
+    if (cases.indexOf('CASE_THREE') !== -1 && determination <= 9) {
+      attributes.set('pressure', 4, 20);
     }
-    if (cases.indexOf(4) !== -1 && determination <= 9) {
-      attributes.sportsmanship = new MinMax(1, 17);
+    if (cases.indexOf('CASE_FOUR') !== -1 && determination <= 9) {
+      attributes.set('sportsmanship', 1, 17);
     }
-    if (cases.indexOf(5) !== -1 && determination >= 11 && determination <= 20) {
-      attributes.sportsmanship = new MinMax(5, 20);
+    if (cases.indexOf('CASE_FIVE') !== -1 && determination >= 11 && determination <= 20) {
+      attributes.set('sportsmanship', 5, 20);
     }
-    if (cases.indexOf(6) !== -1 && determination >= 15 && determination <= 20) {
-      attributes.pressure = new MinMax(15, 16);
+    if (cases.indexOf('CASE_SIX') !== -1 && determination >= 15 && determination <= 20) {
+      attributes.set('pressure', 15, 16);
     }
-    if (cases.indexOf(7) !== -1 && determination >= 18 && determination <= 20) {
-      attributes.ambition = new MinMax(1, 9);
+    if (cases.indexOf('CASE_SEVEN') !== -1 && determination >= 18 && determination <= 20) {
+      attributes.set('ambition', 1, 9);
     }
     if (Object.keys(attributes).length > 0) {
       return attributes;
@@ -38,381 +38,391 @@ export class ParamCalculatorPersonality {
     const attributes = new Attributes();
     switch (param) {
       case PersonalityEnum.model_citizen : {
-        attributes.professionalism = new MinMax(18, 20);
-        attributes.determination = new MinMax(18, 20);
-        attributes.pressure = new MinMax(18, 20);
-        attributes.ambition = new MinMax(18, 20);
-        attributes.loyalty = new MinMax(18, 20);
-        attributes.sportsmanship = new MinMax(18, 20);
-        attributes.temperament = new MinMax(18, 20);
+        attributes
+          .set('professionalism', 18, 20)
+          .set('determination', 18, 20)
+          .set('pressure', 18, 20)
+          .set('ambition', 18, 20)
+          .set('loyalty', 18, 20)
+          .set('sportsmanship', 18, 20)
+          .set('temperament', 18, 20);
         break;
       }
       case PersonalityEnum.model_professional : {
-        attributes.professionalism = new MinMax(20);
-        attributes.temperament = new MinMax(10, 20);
+        attributes
+          .set('professionalism', 20)
+          .set('temperament', 10, 20);
         break;
       }
       case PersonalityEnum.professional : {
-        attributes.professionalism = new MinMax(18, 19);
-        attributes.temperament = new MinMax(10, 20);
+        attributes
+          .set('professionalism', 18, 19)
+          .set('temperament', 10, 20);
         break;
       }
       case PersonalityEnum.perfectionist : {
-        attributes.professionalism = new MinMax(18, 20);
-        attributes.determination = new MinMax(18, 20);
-        attributes.ambition = new MinMax(18, 20);
-        attributes.temperament = new MinMax(1, 9);
+        attributes
+          .set('professionalism', 18, 20)
+          .set('determination', 18, 20)
+          .set('ambition', 18, 20)
+          .set('temperament', 1, 9);
         break;
       }
       case PersonalityEnum.temperamental : {
-        attributes.professionalism = new MinMax(1, 10);
-        attributes.temperament = new MinMax(1, 4);
+        attributes
+          .set('professionalism', 1, 10)
+          .set('temperament', 1, 4);
         break;
       }
       case PersonalityEnum.driven : {
-        attributes.determination = new MinMax(20);
-        attributes.ambition = new MinMax(10, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addSixPers()
-        ];
+        attributes
+          .set('determination', 20)
+          .set('ambition', 10, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addSixPers()
+          ]);
         break;
       }
       case PersonalityEnum.determined : {
-        attributes.determination = new MinMax(18, 19);
-        attributes.ambition = new MinMax(10, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addSixPers()
-        ];
+        attributes
+          .set('determination', 18, 19)
+          .set('ambition', 10, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addSixPers()
+          ]);
         break;
       }
       case PersonalityEnum.slack : {
-        attributes.professionalism = new MinMax(1);
-        attributes.determination = new MinMax(1, 9);
-        attributes.temperament = new MinMax(5, 20);
+        attributes
+          .set('professionalism', 1)
+          .set('determination', 1, 9)
+          .set('temperament', 5, 20);
         break;
       }
       case PersonalityEnum.casual : {
-        attributes.professionalism = new MinMax(2, 4);
-        attributes.determination = new MinMax(1, 9);
-        attributes.temperament = new MinMax(5, 20);
+        attributes
+          .set('professionalism', 2, 4)
+          .set('determination', 1, 9)
+          .set('temperament', 5, 20);
         break;
       }
       case PersonalityEnum.very_ambitious : {
-        attributes.ambition = new MinMax(20);
-        attributes.loyalty = new MinMax(1, 9);
-        attributes.determination = new MinMax(1, 17);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [2])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [2]);
-        }
+        attributes
+          .set('ambition', 20)
+          .set('loyalty', 1, 9)
+          .set('determination', 1, 17)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_TWO']));
         break;
       }
       case PersonalityEnum.amibitous : {
-        attributes.ambition = new MinMax(16, 19);
-        attributes.loyalty = new MinMax(1, 9);
-        attributes.determination = new MinMax(1, 17);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [2])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [2]);
-        }
+        attributes
+          .set('ambition', 16, 19)
+          .set('loyalty', 1, 9)
+          .set('determination', 1, 17)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_TWO']));
         break;
       }
       case PersonalityEnum.unambitious : {
-        attributes.ambition = new MinMax(1, 5);
-        attributes.loyalty = new MinMax(11, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [2])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [2]);
-        }
+        attributes
+          .set('ambition', 1, 5)
+          .set('loyalty', 11, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_TWO']));
         break;
       }
       case PersonalityEnum.honest : {
-        attributes.sportsmanship = new MinMax(5, 20);
-        attributes.determination = new MinMax(1, 9);
-        attributes.professionalism = new MinMax(5, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers()
-        ];
+        attributes
+          .set('sportsmanship', 5, 20)
+          .set('determination', 1, 9)
+          .set('professionalism', 5, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers()
+          ]);
         break;
       }
       case PersonalityEnum.sporting : {
-        attributes.sportsmanship = new MinMax(18, 19);
-        attributes.determination = new MinMax(1, 9);
-        attributes.professionalism = new MinMax(5, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers()
-        ];
+        attributes
+          .set('sportsmanship', 18, 19)
+          .set('determination', 1, 9)
+          .set('professionalism', 5, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers()
+          ]);
         break;
       }
       case PersonalityEnum.easily_discouraged : {
-        attributes.determination = new MinMax(1);
-        attributes.ambition = new MinMax(1, 9);
-        attributes.sportsmanship = new MinMax(1, 17);
-        attributes.professionalism = new MinMax(5, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addThreePers()
-        ];
+        attributes
+          .set('determination', 1)
+          .set('ambition', 1, 9)
+          .set('sportsmanship', 1, 17)
+          .set('professionalism', 5, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addThreePers()
+          ]);
         break;
       }
       case PersonalityEnum.low_determination : {
-        attributes.determination = new MinMax(2, 5);
-        attributes.ambition = new MinMax(1, 9);
-        attributes.sportsmanship = new MinMax(1, 17);
-        attributes.professionalism = new MinMax(5, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addThreePers()
-        ];
+        attributes
+          .set('determination', 2, 5)
+          .set('ambition', 1, 9)
+          .set('sportsmanship', 1, 17)
+          .set('professionalism', 5, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addThreePers()
+          ]);
         break;
       }
       case PersonalityEnum.unsporting : {
-        attributes.sportsmanship = new MinMax(1);
-        attributes.determination = new MinMax(11, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [7])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [7]);
-        }
+        attributes
+          .set('sportsmanship', 1)
+          .set('determination', 11, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_SEVEN']));
         break;
       }
       case PersonalityEnum.realist : {
-        attributes.sportsmanship = new MinMax(2, 4);
-        attributes.determination = new MinMax(11, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [7])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [7]);
-        }
+        attributes
+          .set('sportsmanship', 2, 4)
+          .set('determination', 11, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_SEVEN']));
         break;
       }
       case PersonalityEnum.very_loyal : {
-        attributes.loyalty = new MinMax(20);
-        attributes.ambition = new MinMax(6, 7);
-        attributes.determination = new MinMax(6, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [2, 5])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [2, 5]);
-        }
+        attributes
+          .set('loyalty', 20)
+          .set('ambition', 6, 7)
+          .set('determination', 6, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_TWO', 'CASE_FIVE']));
         break;
       }
       case PersonalityEnum.loyal : {
-        attributes.loyalty = new MinMax(18, 19);
-        attributes.ambition = new MinMax(6, 7);
-        attributes.determination = new MinMax(6, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addOnePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [2, 5])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [2, 5]);
-        }
+        attributes
+          .set('loyalty', 18, 19)
+          .set('ambition', 6, 7)
+          .set('determination', 6, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addOnePers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_TWO', 'CASE_FIVE']));
         break;
       }
       case PersonalityEnum.iron_willed : {
-        attributes.pressure = new MinMax(20);
-        attributes.determination = new MinMax(15, 20);
-        attributes.sportsmanship = new MinMax(5, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(),
-          Attributes.addOnePers(),
-          Attributes.addTwoPers(),
-          Attributes.addThreePers(),
-          Attributes.addFourPers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [7])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [7]);
-        }
+        attributes
+          .set('pressure', 20)
+          .set('determination', 15, 20)
+          .set('sportsmanship', 5, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(),
+            Attributes.addOnePers(),
+            Attributes.addTwoPers(),
+            Attributes.addThreePers(),
+            Attributes.addFourPers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_SEVEN']));
         break;
       }
       case PersonalityEnum.resilient : {
-        attributes.pressure = new MinMax(17, 19);
-        attributes.determination = new MinMax(15, 20);
-        attributes.sportsmanship = new MinMax(5, 20);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(),
-          Attributes.addOnePers(),
-          Attributes.addTwoPers(),
-          Attributes.addThreePers(),
-          Attributes.addFourPers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [7])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [7]);
-        }
+        attributes
+          .set('pressure', 17, 19)
+          .set('determination', 15, 20)
+          .set('sportsmanship', 5, 20)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(),
+            Attributes.addOnePers(),
+            Attributes.addTwoPers(),
+            Attributes.addThreePers(),
+            Attributes.addFourPers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_SEVEN']));
         break;
       }
       case PersonalityEnum.spineless : {
-        attributes.pressure = new MinMax(1);
-        attributes.determination = new MinMax(1, 9);
-        attributes.professionalism = new MinMax(5, 20);
-        attributes.sportsmanship = new MinMax(1, 17);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(),
-          Attributes.addOnePers(),
-          Attributes.addTwoPers(),
-          Attributes.addThreePers(),
-          Attributes.addFourPers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [1])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [1]);
-        }
+        attributes
+          .set('pressure', 1)
+          .set('determination', 1, 9)
+          .set('professionalism', 5, 20)
+          .set('sportsmanship', 1, 17)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(),
+            Attributes.addOnePers(),
+            Attributes.addTwoPers(),
+            Attributes.addThreePers(),
+            Attributes.addFourPers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_ONE']));
         break;
       }
       case PersonalityEnum.low_self_belief : {
-        attributes.pressure = new MinMax(2, 3);
-        attributes.determination = new MinMax(1, 9);
-        attributes.professionalism = new MinMax(5, 20);
-        attributes.sportsmanship = new MinMax(1, 17);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(),
-          Attributes.addOnePers(),
-          Attributes.addTwoPers(),
-          Attributes.addThreePers(),
-          Attributes.addFourPers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [1])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [1]);
-        }
+        attributes
+          .set('pressure', 2, 3)
+          .set('determination', 1, 9)
+          .set('professionalism', 5, 20)
+          .set('sportsmanship', 1, 17)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(),
+            Attributes.addOnePers(),
+            Attributes.addTwoPers(),
+            Attributes.addThreePers(),
+            Attributes.addFourPers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_ONE']));
         break;
       }
       case PersonalityEnum.light_hearted : {
-        attributes.pressure = new MinMax(15, 20);
-        attributes.sportsmanship = new MinMax(15, 20);
-        attributes.temperament = new MinMax(10, 20);
-        attributes.professionalism = new MinMax(1, 17);
-        attributes.doubleCases = [
-          Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [1, 2, 4, 6, 7])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [1, 2, 4, 6, 7]);
-        }
+        attributes
+          .set('pressure', 15, 20)
+          .set('sportsmanship', 15, 20)
+          .set('temperament', 10, 20)
+          .set('professionalism', 1, 17)
+          .setDoubleCases([
+            Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers()
+          ])
+          .setFromDetermination(
+            this.calculateParamFromDetermination(determination, ['CASE_ONE', 'CASE_TWO', 'CASE_FOUR', 'CASE_SIX', 'CASE_SEVEN'])
+          );
         break;
       }
       case PersonalityEnum.spirited : {
-        attributes.pressure = new MinMax(15, 20);
-        attributes.sportsmanship = new MinMax(1, 14);
-        attributes.temperament = new MinMax(10, 20);
-        attributes.professionalism = new MinMax(11, 17);
-        attributes.doubleCases = [
-          Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [1, 4, 5, 6, 7])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [1, 4, 5, 6, 7]);
-        }
+        attributes
+          .set('pressure', 15, 20)
+          .set('sportsmanship', 1, 14)
+          .set('temperament', 10, 20)
+          .set('professionalism', 11, 17)
+          .setDoubleCases([
+            Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers()
+          ])
+          .setFromDetermination(
+            this.calculateParamFromDetermination(determination, ['CASE_ONE', 'CASE_FOUR', 'CASE_FIVE', 'CASE_SIX', 'CASE_SEVEN'])
+          );
         break;
       }
       case PersonalityEnum.jovial : {
-        attributes.pressure = new MinMax(15, 20);
-        attributes.sportsmanship = new MinMax(1, 14);
-        attributes.temperament = new MinMax(10, 20);
-        attributes.professionalism = new MinMax(1, 10);
-        attributes.doubleCases = [
-          Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [1, 2, 4, 5, 6, 7])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [1, 2, 4, 5, 6, 7]);
-        }
+        attributes
+          .set('pressure', 15, 20)
+          .set('sportsmanship', 1, 14)
+          .set('temperament', 10, 20)
+          .set('professionalism', 1, 10)
+          .setDoubleCases([
+            Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers()
+          ])
+          .setFromDetermination(
+            this.calculateParamFromDetermination(determination, [
+              'CASE_ONE', 'CASE_TWO', 'CASE_FOUR', 'CASE_FIVE', 'CASE_SIX', 'CASE_SEVEN'
+            ])
+          );
         break;
       }
       case PersonalityEnum.resolute : {
-        attributes.professionalism = new MinMax(15, 20);
-        attributes.determination = new MinMax(15, 20);
-        attributes.sportsmanship = new MinMax(5, 20);
-        attributes.pressure = new MinMax(1, 16);
-        attributes.doubleCases = [
-          Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers(), Attributes.addFivePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [7])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [7]);
-        }
+        attributes
+          .set('professionalism', 15, 20)
+          .set('determination', 15, 20)
+          .set('sportsmanship', 5, 20)
+          .set('pressure', 1, 16)
+          .setDoubleCases([
+            Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers(), Attributes.addFivePers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_SEVEN']));
         break;
       }
       case PersonalityEnum.fairly_professional : {
-        attributes.professionalism = new MinMax(15, 20);
-        attributes.determination = new MinMax(1, 14);
-        attributes.doubleCases = [
-          Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers(), Attributes.addFivePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [1, 3, 4, 5])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [1, 3, 4, 5]);
-        }
+        attributes
+          .set('professionalism', 15, 20)
+          .set('determination', 1, 14)
+          .setDoubleCases([
+            Attributes.addOnePers(), Attributes.addTwoPers(), Attributes.addThreePers(), Attributes.addFourPers(), Attributes.addFivePers()
+          ])
+          .setFromDetermination(
+            this.calculateParamFromDetermination(determination, ['CASE_ONE', 'CASE_THREE', 'CASE_FOUR', 'CASE_FIVE'])
+          );
         break;
       }
       case PersonalityEnum.fairly_determined : {
-        attributes.determination = new MinMax(15, 20);
-        attributes.professionalism = new MinMax(1, 14);
-        attributes.sportsmanship = new MinMax(5, 20);
-        attributes.pressure = new MinMax(1, 16);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(),
-          Attributes.addTwoPers(),
-          Attributes.addThreePers(),
-          Attributes.addFourPers(),
-          Attributes.addFivePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [7])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [7]);
-        }
+        attributes
+          .set('determination', 15, 20)
+          .set('professionalism', 1, 14)
+          .set('sportsmanship', 5, 20)
+          .set('pressure', 1, 16)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(),
+            Attributes.addTwoPers(),
+            Attributes.addThreePers(),
+            Attributes.addFourPers(),
+            Attributes.addFivePers()
+          ])
+          .setFromDetermination(this.calculateParamFromDetermination(determination, ['CASE_SEVEN']));
         break;
       }
       case PersonalityEnum.fairly_amibitous : {
-        attributes.ambition = new MinMax(15, 20);
-        attributes.professionalism = new MinMax(1, 14);
-        attributes.determination = new MinMax(1, 14);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addTwoPers(), Attributes.addFivePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [2, 3, 4, 5])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [2, 3, 4, 5]);
-        }
+        attributes
+          .set('ambition', 15, 20)
+          .set('professionalism', 1, 14)
+          .set('determination', 1, 14)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addTwoPers(), Attributes.addFivePers()
+          ])
+          .setFromDetermination(
+            this.calculateParamFromDetermination(determination, ['CASE_TWO', 'CASE_THREE', 'CASE_FOUR', 'CASE_FIVE'])
+          );
         break;
       }
       case PersonalityEnum.fairly_loyal : {
-        attributes.loyalty = new MinMax(15, 20);
-        attributes.professionalism = new MinMax(1, 14);
-        attributes.determination = new MinMax(1, 14);
-        attributes.ambition = new MinMax(6, 14);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addFourPers(), Attributes.addFivePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [1, 2, 3, 4, 5])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [1, 2, 3, 4, 5]);
-        }
+        attributes
+          .set('loyalty', 15, 20)
+          .set('professionalism', 1, 14)
+          .set('determination', 1, 14)
+          .set('ambition', 6, 14)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addFourPers(), Attributes.addFivePers()
+          ])
+          .setFromDetermination(
+            this.calculateParamFromDetermination(determination, ['CASE_ONE', 'CASE_TWO', 'CASE_THREE', 'CASE_FOUR', 'CASE_FIVE'])
+          );
         break;
       }
       case PersonalityEnum.fairly_sporting : {
-        attributes.sportsmanship = new MinMax(15, 20);
-        attributes.professionalism = new MinMax(1, 14);
-        attributes.determination = new MinMax(1, 14);
-        attributes.ambition = new MinMax(1, 14);
-        attributes.loyalty = new MinMax(1, 14);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addFivePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [1, 2, 3, 4])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [1, 2, 3, 4]);
-        }
+        attributes
+          .set('sportsmanship', 15, 20)
+          .set('professionalism', 1, 14)
+          .set('determination', 1, 14)
+          .set('ambition', 1, 14)
+          .set('loyalty', 1, 14)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addFivePers()
+          ])
+          .setFromDetermination(
+            this.calculateParamFromDetermination(determination, ['CASE_ONE', 'CASE_TWO', 'CASE_THREE', 'CASE_FOUR'])
+          );
         break;
       }
       case PersonalityEnum.balanced : {
-        attributes.professionalism = new MinMax(1, 14);
-        attributes.determination = new MinMax(1, 14);
-        attributes.ambition = new MinMax(1, 14);
-        attributes.loyalty = new MinMax(1, 14);
-        attributes.sportsmanship = new MinMax(1, 14);
-        attributes.doubleCases = [
-          Attributes.addAsteriskPers(), Attributes.addThreePers(), Attributes.addFivePers()
-        ];
-        if (this.calculateParamFromDetermination(determination, [1, 2, 3, 5])) {
-          attributes.fromDetermination = this.calculateParamFromDetermination(determination, [1, 2, 3, 5]);
-        }
+        attributes
+          .set('professionalism', 1, 14)
+          .set('determination', 1, 14)
+          .set('ambition', 1, 14)
+          .set('loyalty', 1, 14)
+          .set('sportsmanship', 1, 14)
+          .setDoubleCases([
+            Attributes.addAsteriskPers(), Attributes.addThreePers(), Attributes.addFivePers()
+          ])
+          .setFromDetermination(
+            this.calculateParamFromDetermination(determination, ['CASE_ONE', 'CASE_TWO', 'CASE_THREE', 'CASE_FIVE'])
+          );
         break;
       }
       default:
