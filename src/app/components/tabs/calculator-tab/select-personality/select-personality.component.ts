@@ -2,10 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PersonalityEnum} from '../../../../classes/personality.enum';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {ParamCalculatorService} from '../../../../services/param-calculator.service';
 import {Attributes} from '../../../../classes/attributes';
-import {MinMax} from '../../../../classes/min-max';
 import {InputErrorMatcher} from '../../../../classes/input-error-matcher';
+import {ParamCalculatorPersonality} from '../../../../services/param-calculator-personality';
+import {ParamEventsService} from '../../../../services/param-events.service';
+import {AttributeValueTypes} from '../../../../classes/attribute-value-types';
 
 @Component({
   selector: 'app-select-personality',
@@ -22,7 +23,7 @@ export class SelectPersonalityComponent implements OnInit, OnDestroy {
   public determinationFormControl: AbstractControl;
   public personalityFormControl: AbstractControl;
 
-  constructor(private fb: FormBuilder, private paramCalculatorService: ParamCalculatorService) {
+  constructor(private fb: FormBuilder, private paramEventsService: ParamEventsService) {
     this.formGroup = this.fb.group({
         determination: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
         personality: [{value: null, disabled: true}, [Validators.required]]
@@ -39,18 +40,19 @@ export class SelectPersonalityComponent implements OnInit, OnDestroy {
           this.detValue = null;
           this.personalityFormControl.patchValue(null);
           this.personalityFormControl.disable();
+          this.paramEventsService.setParamPers(null);
         }
       }),
       this.personalityFormControl.valueChanges.subscribe((personality) => {
         if (this.detValue && personality) {
           const attributes: Attributes =
-            ParamCalculatorService.calculateBaseParamFromPersonality(this.detValue, personality);
-          attributes.determination = new MinMax(this.detValue);
-          this.paramCalculatorService.setParamPers(attributes);
+            ParamCalculatorPersonality.calculateBaseParamFromPersonality(this.detValue, personality);
+          attributes.set('determination', (this.detValue) as AttributeValueTypes);
+          this.paramEventsService.setParamPers(attributes);
         }
       }),
-      this.paramCalculatorService.clearForm$.subscribe((data) => {
-        if (data && data.personality) {
+      this.paramEventsService.clearForm$.subscribe((data: boolean) => {
+        if (data) {
           this.determinationFormControl.patchValue(null);
         }
       })

@@ -1,6 +1,6 @@
 export class MinMax {
-  min: number;
-  max: number;
+  private min: number;
+  private max: number;
 
   constructor(min: number, max?: number) {
     if (min <= 0 || min > 20 || (max && max <= 0 && max > 20)) {

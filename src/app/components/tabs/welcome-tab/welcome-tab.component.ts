@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {USEFUL_LINKS} from '../../../classes/attributes-description';
+import {USEFULLINKS} from '../../../classes/attributes-description';
 
 @Component({
   selector: 'app-welcome-tab',
@@ -8,7 +8,7 @@ import {USEFUL_LINKS} from '../../../classes/attributes-description';
 })
 export class WelcomeTabComponent implements OnInit {
 
-  public usefulLinks: typeof USEFUL_LINKS = USEFUL_LINKS;
+  public usefulLinks: typeof USEFULLINKS = USEFULLINKS;
 
   constructor() {
   }
