@@ -24,8 +24,8 @@ export class SelectMediaComponent implements OnInit, OnDestroy {
     );
     this.mediaHandingFormControl = this.formGroup.get('mediaHandling');
     this.subs.push(
-      this.paramEventsService.clearForm$.subscribe((data) => {
-        if (data && data.media) {
+      this.paramEventsService.clearForm$.subscribe((data: boolean) => {
+        if (data) {
           this.mediaHandingFormControl.patchValue(null);
         }
       })

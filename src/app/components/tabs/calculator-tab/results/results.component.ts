@@ -19,6 +19,13 @@ export class ResultsComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
+  public trackByFn(index: number, item): number {
+    if (!item) {
+      return null;
+    }
+    return index;
+  }
+
   ngOnChanges() {
     if (!this.results) {
       return;

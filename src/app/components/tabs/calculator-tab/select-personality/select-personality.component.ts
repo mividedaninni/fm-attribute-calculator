@@ -40,6 +40,7 @@ export class SelectPersonalityComponent implements OnInit, OnDestroy {
           this.detValue = null;
           this.personalityFormControl.patchValue(null);
           this.personalityFormControl.disable();
+          this.paramEventsService.setParamPers(null);
         }
       }),
       this.personalityFormControl.valueChanges.subscribe((personality) => {
@@ -50,8 +51,8 @@ export class SelectPersonalityComponent implements OnInit, OnDestroy {
           this.paramEventsService.setParamPers(attributes);
         }
       }),
-      this.paramEventsService.clearForm$.subscribe((data) => {
-        if (data && data.personality) {
+      this.paramEventsService.clearForm$.subscribe((data: boolean) => {
+        if (data) {
           this.determinationFormControl.patchValue(null);
         }
       })
