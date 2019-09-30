@@ -17,6 +17,7 @@ import {CalculatorTabComponent} from './components/tabs/calculator-tab/calculato
 import {HeaderComponent} from './components/header/header.component';
 import {BodyComponent} from './components/body/body.component';
 import {FooterComponent} from './components/footer/footer.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {FooterComponent} from './components/footer/footer.component';
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    NgbModule
   ],
   declarations: [
     AppComponent,
