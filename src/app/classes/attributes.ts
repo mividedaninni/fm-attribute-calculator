@@ -99,7 +99,9 @@ export class Attributes {
   }
 
   public setFromDetermination(attributes: Attributes) {
-    this.fromDetermination = attributes;
+    if (attributes) {
+      this.fromDetermination = attributes;
+    }
     return this;
   }
 
