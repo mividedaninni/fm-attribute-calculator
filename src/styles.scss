@@ -34,6 +34,13 @@ table {
   display: none;
 }
 
+.cursor-pointer {
+  color: mat-color($my-theme-primary);
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 @include media-breakpoint-down(xs) {
   .display-small {
     display: block;

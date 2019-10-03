@@ -2,13 +2,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './components/app.component';
-import {SelectPersonalityComponent} from './components/tabs/calculator-tab/select-personality/select-personality.component';
+import {CalculatorFormComponent} from './components/tabs/calculator-tab/calculator-form/calculator-form.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SelectMediaComponent} from './components/tabs/calculator-tab/select-media/select-media.component';
-import {ResultsComponent} from './components/tabs/calculator-tab/results/results.component';
-import {RedgreenDirective} from './directives/redgreen.directive';
+import {CalculatorResultsComponent} from './components/tabs/calculator-tab/calculator-results/calculator-results.component';
 import {StaticAttributesTabComponent} from './components/tabs/static-attributes-tab/static-attributes-tab.component';
 import {MaterialModule} from './material/material.module';
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material';
@@ -32,10 +30,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [
     AppComponent,
-    SelectPersonalityComponent,
-    SelectMediaComponent,
-    ResultsComponent,
-    RedgreenDirective,
+    CalculatorFormComponent,
+    CalculatorResultsComponent,
     StaticAttributesTabComponent,
     WelcomeTabComponent,
     CalculatorTabComponent,

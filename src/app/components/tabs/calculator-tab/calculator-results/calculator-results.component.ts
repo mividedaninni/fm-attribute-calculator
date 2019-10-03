@@ -4,14 +4,14 @@ import {AttributesDescription} from '../../../../classes/attributes-description'
 import {KeyValue} from '@angular/common';
 
 @Component({
-  selector: 'app-results',
-  templateUrl: './results.component.html',
-  styleUrls: ['./results.component.scss']
+  selector: 'app-calculator-results',
+  templateUrl: './calculator-results.component.html',
+  styleUrls: ['./calculator-results.component.scss']
 })
-export class ResultsComponent implements OnInit, OnChanges {
+export class CalculatorResultsComponent implements OnInit, OnChanges {
 
   @Input() results: Attributes;
-  keys: Array<KeyValue<string, string>>;
+  public keys: Array<KeyValue<string, string>>;
 
   constructor() {
   }

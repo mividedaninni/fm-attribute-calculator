@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to h-a-c!');
+    expect(page.getTitleText()).toEqual('Welcome to fm-attribute-calculator!');
   });
 
   afterEach(async () => {

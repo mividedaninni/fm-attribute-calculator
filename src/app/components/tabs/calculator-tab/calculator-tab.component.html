@@ -1,18 +1,13 @@
-<mat-card class="row m-5">
-  <div class="d-inline-flex col-12 px-0">
-    <app-select-personality class="col-8 px-0"></app-select-personality>
-    <app-select-media class="col-4 px-0"></app-select-media>
+<mat-card class="row m-3">
+  <div class="col-12">
+    <app-calculator-form></app-calculator-form>
   </div>
-  <ng-container>
-    <div class="d-inline-flex justify-content-end col-12">
-      <div>
-        <button (click)="clearForm()" color="primary" mat-raised-button type="button">
-          Clear
-        </button>
-      </div>
-    </div>
-  </ng-container>
+  <div class="col-12 d-inline-flex justify-content-end">
+    <button (click)="clearForm()" color="primary" mat-raised-button type="button">
+      Clear
+    </button>
+  </div>
 </mat-card>
 <ng-container *ngIf="finalAttibute">
-  <app-results [results]="finalAttibute"></app-results>
+  <app-calculator-results [results]="finalAttibute"></app-calculator-results>
 </ng-container>

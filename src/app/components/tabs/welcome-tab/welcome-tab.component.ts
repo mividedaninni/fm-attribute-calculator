@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {USEFULLINKS} from '../../../classes/attributes-description';
+import {UtilsService} from '../../../services/utils.service';
 
 @Component({
   selector: 'app-welcome-tab',
@@ -14,6 +15,10 @@ export class WelcomeTabComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public openLink(url: string): void {
+    UtilsService.openUrl(url);
   }
 
 }

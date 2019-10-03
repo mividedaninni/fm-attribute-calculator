@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup">
-  <mat-form-field class="col-6" floatLabel="always">
+  <mat-form-field class="col-md-4 col-sm-12 col-xs-12" floatLabel="always">
     <mat-label for="determination">
       Determination
     </mat-label>
@@ -17,7 +17,7 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field class="col-6" floatLabel="always">
+  <mat-form-field class="col-md-4 col-sm-12 col-xs-12" floatLabel="always">
     <mat-label for="personality">Personality:</mat-label>
     <mat-select formControlName="personality" id="personality" placeholder="Choose a personality" required>
       <mat-option *ngFor="let pers of personalityOptions | keyvalue" [value]="pers.value">
@@ -26,6 +26,18 @@
     </mat-select>
     <mat-error *ngIf="personalityFormControl.hasError('required')">
       Personality is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="col-md-4 col-sm-12 col-xs-12" floatLabel="always">
+    <mat-label for="media"> Media handling:</mat-label>
+    <mat-select formControlName="mediaHandling" id="media" placeholder="Choose a media handling style" required>
+      <mat-option *ngFor="let media of mediaHandlingOptions | keyvalue" [value]="media.value">
+        {{media.value}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="mediaHandingFormControl.hasError('required')">
+      Media handling is <strong>required</strong>
     </mat-error>
   </mat-form-field>
 </form>
