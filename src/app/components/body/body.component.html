@@ -1,27 +1,23 @@
-<div class="container-fluid">
-  <mat-tab-group class="row">
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="mr-2">info</mat-icon>
-        Welcome
-      </ng-template>
-      <app-welcome-tab></app-welcome-tab>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="mr-2">tune</mat-icon>
-        Attributes calculator
-      </ng-template>
-      <app-calculator-tab></app-calculator-tab>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="mr-2">receipts</mat-icon>
-        Static attribute
-      </ng-template>
-      <mat-card>
-        <app-static-attributes-tab></app-static-attributes-tab>
-      </mat-card>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mr-2">tune</mat-icon>
+      <span class="display-medium">Attributes calculator</span>
+    </ng-template>
+    <app-calculator-tab></app-calculator-tab>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mr-2">receipts</mat-icon>
+      <span class="display-medium">Static attribute</span>
+    </ng-template>
+    <app-static-attributes-tab></app-static-attributes-tab>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mr-2">info</mat-icon>
+      <span class="display-medium">Info</span>
+    </ng-template>
+    <app-welcome-tab></app-welcome-tab>
+  </mat-tab>
+</mat-tab-group>

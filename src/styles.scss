@@ -1,6 +1,8 @@
-//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~@angular/material/theming';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/mixins/_breakpoints';
 
 @include mat-core();
 
@@ -26,4 +28,17 @@ table {
 
 .mat-cell, .mat-header-cell {
   padding: 12px !important;
+}
+
+.display-small {
+  display: none;
+}
+
+@include media-breakpoint-down(xs) {
+  .display-small {
+    display: block;
+  }
+  .display-medium {
+    display: none;
+  }
 }
